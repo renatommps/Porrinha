@@ -1,11 +1,17 @@
 package principal;
 
-import visao.InterfaceComUsuario;
+import controle.ControladorDeJogo;
+import visao.ConsoleInterface;
+import visao.Interface;
 
 public class Porrinha {
 
 	public static void main(String[] args) {
-		new InterfaceComUsuario();
+		ControladorDeJogo controlador = new ControladorDeJogo();
+		controlador.iniciaJogo();
+		
+//		Interface userInterface = new ConsoleInterface();
+//		userInterface.exibeMenuInicial();
 	}
 
 }
