@@ -1,8 +1,8 @@
 package principal;
 
 import controle.ControladorDeJogo;
-import visao.ConsoleInterface;
-import visao.Interface;
+//import visao.ConsoleInterface;
+//import visao.Interface;
 
 public class Porrinha {
 
