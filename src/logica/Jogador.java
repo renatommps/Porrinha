@@ -1,19 +1,19 @@
 package logica;
 
-public class Jogador {
-
-	public Jogador(String nome) {
-		super();
-		this.nome = nome;
-	}
+public abstract class Jogador {
 
 	private String nome;
+
+	public Jogador(String nome) {
+		this.nome = nome;
+	}
 
 	public String getNome() {
 		return nome;
 	}
 
-	public void setNome(String nome) {
-		this.nome = nome;
-	}
+	abstract public void decidirJogada();
+
+	abstract public void estimarResultado(Rodada rodada);
+
 }

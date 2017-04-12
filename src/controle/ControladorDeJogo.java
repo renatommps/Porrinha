@@ -3,7 +3,8 @@ package controle;
 import java.util.ArrayList;
 import java.util.List;
 
-import logica.Jogador;
+import logica.StateExit;
+import logica.JogadorIA;
 import logica.StateContext;
 import visao.ConsoleInterface;
 import visao.Interface;
@@ -14,7 +15,7 @@ public class ControladorDeJogo {
 	Interface userInterface;
 
 	// lógica
-	protected List<Jogador> jogadores;
+	protected List<JogadorIA> jogadores;
 	protected int numeroDeJogadoresIA;
 	protected int numeroDeJogadoresHumanos;
 
@@ -22,7 +23,7 @@ public class ControladorDeJogo {
 	final StateContext gameState;
 
 	public ControladorDeJogo() {
-		jogadores = new ArrayList<Jogador>();
+		jogadores = new ArrayList<JogadorIA>();
 		
 		userInterface = new ConsoleInterface(this);
 
@@ -31,7 +32,7 @@ public class ControladorDeJogo {
 
 	public void iniciaJogo() {
 
-		while(!(gameState.getState() instanceof ExitState)){
+		while(!(gameState.getState() instanceof StateExit)){
 			gameState.process();
 		}
 	}

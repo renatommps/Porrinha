@@ -1,9 +1,8 @@
-package controle;
+package logica;
 
-import logica.State;
-import logica.StateContext;
+import controle.ControladorDeJogo;
 
-public class ExitState implements State {
+public class StateExit implements State {
 
 	@Override
 	public void process(StateContext context, ControladorDeJogo controladorDeJogo) {
