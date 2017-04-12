@@ -1,4 +1,4 @@
-package igu;
+package visao;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -7,6 +7,10 @@ import java.util.Scanner;
 import logica.Jogador;
 
 public class InterfaceComUsuario {
+
+	public enum Estados {
+		INICIA_JOGO, PREPARA_PARTIDA, PREPARA_RODADA, INICIA_RODADA, FINALIZA_PARTIDA;
+	};
 
 	private List<Jogador> jogadores;
 	private int numeroDeJogadoresIA;
@@ -27,6 +31,7 @@ public class InterfaceComUsuario {
 		while (!exit) {
 			exibeMenuInicial();
 			InstanciaJogadoreIA();
+			InstanciaJogadoresHumanos();
 		}
 
 		scanner.close();
@@ -48,5 +53,10 @@ public class InterfaceComUsuario {
 		for (int i = 0; i < numeroDeJogadoresIA; i++) {
 			jogadores.add(new Jogador());
 		}
+	}
+
+	private void InstanciaJogadoresHumanos() {
+		System.out.println("Quantos jogadores de IA o jogo irá ter ? (mínimo 2, máximo 5)");
+
 	}
 }

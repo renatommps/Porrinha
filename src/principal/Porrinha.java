@@ -1,6 +1,6 @@
 package principal;
 
-import igu.InterfaceComUsuario;
+import visao.InterfaceComUsuario;
 
 public class Porrinha {
 
