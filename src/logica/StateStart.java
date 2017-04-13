@@ -6,7 +6,7 @@ public class StateStart implements State {
 
 	@Override
 	public void process(StateContext context, ControladorDeJogo controladorDeJogo) {
-		controladorDeJogo.exibeMenuInicial();
+		controladorDeJogo.chamaMenuInicial();
 		context.setState(new StatePlayersInstantiation());
 	}
 

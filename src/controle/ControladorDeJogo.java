@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import logica.StateExit;
-import logica.JogadorIA;
+import logica.Jogador;
 import logica.StateContext;
 import visao.ConsoleInterface;
 import visao.Interface;
@@ -15,16 +15,16 @@ public class ControladorDeJogo {
 	Interface userInterface;
 
 	// lógica
-	protected List<JogadorIA> jogadores;
-	protected int numeroDeJogadoresIA;
-	protected int numeroDeJogadoresHumanos;
+	private List<Jogador> jogadores;
+	private int numeroDeJogadoresIA;
+	private int numeroDeJogadoresHumanos;
 
 	// lógica, controle de estados
 	final StateContext gameState;
 
 	public ControladorDeJogo() {
-		jogadores = new ArrayList<JogadorIA>();
-		
+		jogadores = new ArrayList<Jogador>();
+
 		userInterface = new ConsoleInterface(this);
 
 		gameState = new StateContext(this);
@@ -32,13 +32,41 @@ public class ControladorDeJogo {
 
 	public void iniciaJogo() {
 
-		while(!(gameState.getState() instanceof StateExit)){
+		while (!(gameState.getState() instanceof StateExit)) {
 			gameState.process();
 		}
 	}
 
-	public void exibeMenuInicial() {
-		// TODO Auto-generated method stub
-		
+	public int getNumeroDeJogadoresIA() {
+		return numeroDeJogadoresIA;
 	}
+
+	public void setNumeroDeJogadoresIA(int numeroDeJogadoresIA) {
+		this.numeroDeJogadoresIA = numeroDeJogadoresIA;
+	}
+
+	public int getNumeroDeJogadoresHumanos() {
+		return numeroDeJogadoresHumanos;
+	}
+
+	public void setNumeroDeJogadoresHumanos(int numeroDeJogadoresHumanos) {
+		this.numeroDeJogadoresHumanos = numeroDeJogadoresHumanos;
+	}
+
+	public void addJogador(Jogador jogador) {
+		jogadores.add(jogador);
+	}
+
+	public List<Jogador> getJogadores() {
+		return jogadores;
+	}
+
+	public void chamaMenuInicial() {
+		userInterface.exibeMenuInicial();
+	}
+
+	public void chamaMenuDeInstanciacaoDeJogadores() {
+		userInterface.exibeMenuDeInstanciacaoDeJogadores();
+	}
+
 }
