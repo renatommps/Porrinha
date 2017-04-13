@@ -72,7 +72,6 @@ public class EstadoPorrinha implements EstadoArvore {
 		return jogados;
 	}
 	
-	@Override
 	public int getJogadorAtual() {
 		return jogadorAtual;
 	}
