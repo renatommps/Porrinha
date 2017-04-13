@@ -63,6 +63,14 @@ public class EstadoPorrinha implements EstadoArvore {
 		return euristica.accept(this);		
 	}
 	
+	public ArrayList<ArrayList<Integer>> getMaoAposta() {
+		return maoAposta;
+	}
+	
+	public int jogadosPeloAtual() {
+		return jogados;
+	}
+	
 	private boolean unique(int curIndex, int value) {
 		for (int i = 0; i < curIndex; ++i) {
 			if (maoAposta.get(i).get(1) == value) {
