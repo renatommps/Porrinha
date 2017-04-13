@@ -6,4 +6,6 @@ public interface EstadoArvore {
 	public ArrayList<EstadoArvore> transicoes();
 	
 	public boolean isFinal();
+	
+	public ArrayList<Double> visit(Euristica euristica);
 }
