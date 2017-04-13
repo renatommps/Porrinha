@@ -1,8 +1,4 @@
-package visao;
-
-import logica.EuristicaAleatoria;
-import logica.Jogador;
-import logica.JogadorIA;
+package logica;
 
 public class FabricaDeJogador {
 
@@ -19,6 +15,13 @@ public class FabricaDeJogador {
 		}
 
 		return null;
+	}
+
+	public Jogador getJogadorHumano(String nome) {
+		if (nome == null) {
+			return null;
+		}
+		return new JogadorHumano(nome);
 	}
 
 }

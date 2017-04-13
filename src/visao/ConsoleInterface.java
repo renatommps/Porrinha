@@ -3,8 +3,6 @@ package visao;
 import java.util.Scanner;
 
 import controle.ControladorDeJogo;
-import logica.EuristicaAleatoria;
-import logica.JogadorIA;
 
 public class ConsoleInterface extends UserInterface {
 
@@ -19,17 +17,6 @@ public class ConsoleInterface extends UserInterface {
 		super(controladorDeJogo);
 		scanner = new Scanner(System.in);
 	}
-
-	// public void iniciaJogo() {
-	//
-	// while (true) {
-	// exibeMenuInicial();
-	// InstanciaJogadoreIA();
-	// InstanciaJogadoresHumanos();
-	// }
-	//
-	// // scanner.close();
-	// }
 
 	@Override
 	public void exibeMenuInicial() {
@@ -47,24 +34,6 @@ public class ConsoleInterface extends UserInterface {
 	}
 
 	@Override
-	public void exibeMenuDeInstanciacaoDeJogadores() {
-		InstanciaJogadoreIA();
-		InstanciaJogadoresHumanos();
-	}
-
-	@Override
-	public void exibeMenuPreparaRodada() {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void exibeRodada() {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
 	public void exibeResultadoDaRodada() {
 		// TODO Auto-generated method stub
 
@@ -76,22 +45,24 @@ public class ConsoleInterface extends UserInterface {
 
 	}
 
-	private void InstanciaJogadoreIA() {
-		FabricaDeJogador fabricaDeJogador = new FabricaDeJogador();
+	@Override
+	public void exibeMenuDeDefinicaoDeJogadas() {
+		// TODO Auto-generated method stub
 
-		// peça para informar o tipo de IA para cada jogador adicionado, depois mostre na tela o jogador adicionado
-		for (int i = 0; i < controlador.getNumeroDeJogadoresIA(); i++) {
-			controlador.addJogador(fabricaDeJogador.getJogadorIA(Integer.toString(i), "aleatorio"));
-		}
 	}
 
-	private void InstanciaJogadoresHumanos() {
-		for (int i = 0; i < controlador.getNumeroDeJogadoresHumanos(); i++) {
-			// controlador.addJogador(fabricaDeJogador.getJogador("aleatorio"));
-			//
-			// controlador.addJogador(new JogadorIA(Integer.toString(i), new
-			// EuristicaAleatoria()));
-		}
+	@Override
+	public void exibeRodada() {
+		// TODO Auto-generated method stub
 
+	}
+
+	@Override
+	public String exibeMenuDeEntradaDeDadosJogadorHumano(int indiceJogador) {
+		String nomeJogadorHumano = null;
+		System.out.println("Informe um nome para o jogador humano " + indiceJogador);
+		nomeJogadorHumano = scanner.nextLine();
+
+		return nomeJogadorHumano;
 	}
 }

@@ -6,8 +6,20 @@ public class StatePlayersInstantiation implements State {
 
 	@Override
 	public void process(StateContext context, ControladorDeJogo controladorDeJogo) {
-		controladorDeJogo.chamaMenuDeInstanciacaoDeJogadores();
-		context.setState(new StatePlayersInstantiation());
+		FabricaDeJogador fabricaDeJogador = new FabricaDeJogador();
+
+		for (int i = 0; i < controladorDeJogo.getNumeroDeJogadoresIA(); i++) {
+			Jogador novoJogadorIA = fabricaDeJogador.getJogadorIA(Integer.toString(i), "aleatorio");
+			controladorDeJogo.addJogador(novoJogadorIA);
+		}
+
+		for (int i = 0; i < controladorDeJogo.getNumeroDeJogadoresHumanos(); i++) {
+			String nomeJogadorHumano = controladorDeJogo.chamaMenuDeEntradaDeDadosJogadorHumano(i + 1);
+			Jogador novoJogadorHumano = fabricaDeJogador.getJogadorHumano(nomeJogadorHumano);
+			controladorDeJogo.addJogador(novoJogadorHumano);
+		}
+
+		context.setState(new StateRoundSetMove());
 	}
 
 }

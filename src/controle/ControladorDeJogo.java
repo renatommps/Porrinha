@@ -4,7 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import logica.StateExit;
+import logica.HistoricoDeRodadas;
 import logica.Jogador;
+import logica.Rodada;
 import logica.StateContext;
 import visao.ConsoleInterface;
 import visao.Interface;
@@ -15,6 +17,7 @@ public class ControladorDeJogo {
 	Interface userInterface;
 
 	// lógica
+	private HistoricoDeRodadas historicoDeRodadas;
 	private List<Jogador> jogadores;
 	private int numeroDeJogadoresIA;
 	private int numeroDeJogadoresHumanos;
@@ -23,6 +26,8 @@ public class ControladorDeJogo {
 	final StateContext gameState;
 
 	public ControladorDeJogo() {
+		setHistoricoDeRodadas(new HistoricoDeRodadas());
+
 		jogadores = new ArrayList<Jogador>();
 
 		userInterface = new ConsoleInterface(this);
@@ -65,8 +70,28 @@ public class ControladorDeJogo {
 		userInterface.exibeMenuInicial();
 	}
 
-	public void chamaMenuDeInstanciacaoDeJogadores() {
-		userInterface.exibeMenuDeInstanciacaoDeJogadores();
+	public void chamaMenuDeDefinicaoDeJogadas() {
+		userInterface.exibeMenuDeDefinicaoDeJogadas();
+	}
+
+	public String chamaMenuDeEntradaDeDadosJogadorHumano(int indiceJogador) {
+		String nomeJogadorHumano = null;
+
+		nomeJogadorHumano = userInterface.exibeMenuDeEntradaDeDadosJogadorHumano(indiceJogador);
+
+		return nomeJogadorHumano;
+	}
+
+	public HistoricoDeRodadas getHistoricoDeRodadas() {
+		return historicoDeRodadas;
+	}
+
+	public void setHistoricoDeRodadas(HistoricoDeRodadas historicoDeRodadas) {
+		this.historicoDeRodadas = historicoDeRodadas;
+	}
+
+	public void addHistoricoDeRodadas(Rodada rodada) {
+		historicoDeRodadas.addRodada(rodada);
 	}
 
 }
