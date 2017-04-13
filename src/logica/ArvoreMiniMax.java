@@ -21,7 +21,7 @@ public class ArvoreMiniMax {
 				criaNodos.addAll(last.getFilhos());
 			}
 		}
-		//TODO
+		
 		return null;
 	}
 	
@@ -30,7 +30,6 @@ public class ArvoreMiniMax {
 			this.estado = estado;
 			this.profundidade = profundidade;
 			this.estadoFinal = estado.isFinal();
-			System.out.println(profundidade + " " + profundidadeMax);
 			this.folha = (profundidade == profundidadeMax) || estadoFinal;
 			this.filhos = new ArrayList<Nodo>();
 		}
