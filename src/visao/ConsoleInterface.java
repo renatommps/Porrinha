@@ -37,11 +37,11 @@ public class ConsoleInterface extends UserInterface {
 		System.out.println("**** Bem vindo ao maravilhoso jogo de Porrinha! ****");
 		System.out.println("****************************************************");
 
-		System.out.println("Quantos jogadores de IA o jogo irá ter ? (mínimo 2, máximo 5)");
+		System.out.println("Quantos jogadores de IA o jogo ira ter ? (minimo 2, maximo 5)");
 		int numeroDeJogadoresIA = scanner.nextInt();
 		controlador.setNumeroDeJogadoresIA(numeroDeJogadoresIA);
 
-		System.out.println("Quantos jogadores humanos o jogo irá ter ? (mínimo 0, máximo 5)");
+		System.out.println("Quantos jogadores humanos o jogo ira ter ? (minimo 0, maximo 5)");
 		int numeroDeJogadoresHumanos = scanner.nextInt();
 		controlador.setNumeroDeJogadoresHumanos(numeroDeJogadoresHumanos);
 	}
@@ -79,7 +79,7 @@ public class ConsoleInterface extends UserInterface {
 	private void InstanciaJogadoreIA() {
 		FabricaDeJogador fabricaDeJogador = new FabricaDeJogador();
 
-		// peça para informar o tipo de IA para cada jogador adicionado, depois mostre na tela o jogador adicionado
+		// pe��a para informar o tipo de IA para cada jogador adicionado, depois mostre na tela o jogador adicionado
 		for (int i = 0; i < controlador.getNumeroDeJogadoresIA(); i++) {
 			controlador.addJogador(fabricaDeJogador.getJogadorIA(Integer.toString(i), "aleatorio"));
 		}
