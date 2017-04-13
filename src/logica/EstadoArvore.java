@@ -8,4 +8,6 @@ public interface EstadoArvore {
 	public boolean isFinal();
 	
 	public ArrayList<Double> visit(Euristica euristica);
+	
+	public int getJogadorAtual();
 }

@@ -9,6 +9,7 @@ public class EstadoPorrinha implements EstadoArvore {
 		this.jogados = jogados;
 		this.jogadorAtual = jogadorAtual;
 		this.maxJogadores = maxJogadores;
+		System.out.println(maoAposta);
 	}
 	
 	@Override
@@ -71,6 +72,11 @@ public class EstadoPorrinha implements EstadoArvore {
 		return jogados;
 	}
 	
+	@Override
+	public int getJogadorAtual() {
+		return jogadorAtual;
+	}
+	
 	private boolean unique(int curIndex, int value) {
 		for (int i = 0; i < curIndex; ++i) {
 			if (maoAposta.get(i).get(1) == value) {
@@ -84,5 +90,6 @@ public class EstadoPorrinha implements EstadoArvore {
 	private int jogados;
 	private int jogadorAtual;
 	private int maxJogadores;
+	
 	
 }
