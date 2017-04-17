@@ -4,78 +4,88 @@ import java.util.ArrayList;
 
 public class EstadoPorrinha implements EstadoArvore {
 
-	public EstadoPorrinha(ArrayList<ArrayList<Integer>> maoAposta, int jogados, int jogadorAtual, int maxJogadores) {
-		this.maoAposta = maoAposta;
-		this.jogados = jogados;
-		this.jogadorAtual = jogadorAtual;
-		this.maxJogadores = maxJogadores;
-		System.out.println(maoAposta);
-	}
+    private ArrayList<ArrayList<Integer>> maoAposta;
+    private int jogados;
+    private int jogadorAtual;
+    private int maxJogadores;
 
-	@Override
-	public ArrayList<EstadoArvore> transicoes() {
-		ArrayList<EstadoArvore> ret = new ArrayList<EstadoArvore>();
-		int proxJogador = (jogadorAtual + 1) % maxJogadores;
-		int sum = 0;
-		for (ArrayList<Integer> jogador : maoAposta) {
-			sum += jogador.get(0);
-		}
-		for (int i = 0; i <= sum; ++i) {
-			if (unique(jogadorAtual, i)) {
+    public EstadoPorrinha(ArrayList<ArrayList<Integer>> maoAposta, int jogados, int jogadorAtual, int maxJogadores) {
+        this.maoAposta = maoAposta;
+        this.jogados = jogados;
+        this.jogadorAtual = jogadorAtual;
+        this.maxJogadores = maxJogadores;
+        System.out.println(maoAposta);
+    }
 
-				ArrayList<ArrayList<Integer>> novo = new ArrayList<ArrayList<Integer>>(maoAposta);
-				ArrayList<Integer> apostaJogadorAtual = novo.get(jogadorAtual);
-				apostaJogadorAtual.set(1, i);
-				novo.set(jogadorAtual, apostaJogadorAtual);
-				ret.add(new EstadoPorrinha(novo, jogados, proxJogador, maxJogadores));
-			}
-		}
-		return ret;
-	}
+    @Override
+    public ArrayList<EstadoArvore> transicoes() {
+        //Novo estado calculado
+        ArrayList<EstadoArvore> novosEstados = new ArrayList<EstadoArvore>();
+        //Calcula proximo jogador
+        int proxJogador = (jogadorAtual + 1) % maxJogadores;
+        int pedrasNoJogo = 0;
+        //Calculas quantas pedras há no jogo
+        for (ArrayList<Integer> jogador : maoAposta) {
+            pedrasNoJogo += jogador.get(0);
+        }
 
-	public int numJogadores() {
-		return maxJogadores;
-	}
+        for (int i = 0; i <= pedrasNoJogo; ++i) {
+            //Se ninguem apostou a mesma aposta
+            if (apostaUnica(jogadorAtual, i)) {
+                //Copia a mao de aposta atual
+                ArrayList<ArrayList<Integer>> novaMaoAposta = new ArrayList<ArrayList<Integer>>(maoAposta);
+                //Pega a aposta velha do jogador atual
+                ArrayList<Integer> apostaJogadorAtual = novaMaoAposta.get(jogadorAtual);
+                //Cria uma nova aposta, com i pedras
+                apostaJogadorAtual.set(1, i);
+                //Atualiza a aposta do jogadorAtual com a apostaJogadorAtual
+                novaMaoAposta.set(jogadorAtual, apostaJogadorAtual);
+                //Adiciona o novo estado ao novo nivel da arvore.
+                novosEstados.add(new EstadoPorrinha(novaMaoAposta, jogados, proxJogador, maxJogadores));
+            }
+        }
+        return novosEstados;
+    }
 
-	@Override
-	public boolean isFinal() {
-		for (ArrayList<Integer> jogador : maoAposta) {
-			if (jogador.get(1) == -1) {
-				return false;
-			}
-		}
-		return true;
-	}
+    public int numJogadores() {
+        return maxJogadores;
+    }
 
-	@Override
-	public ArrayList<Double> visit(Euristica euristica) {
-		return euristica.accept(this);
-	}
+    @Override
+    public boolean isFinal() {
+        for (ArrayList<Integer> jogador : maoAposta) {
+            if (jogador.get(1) == -1) {
+                return false;
+            }
+        }
+        return true;
+    }
 
-	public ArrayList<ArrayList<Integer>> getMaoAposta() {
-		return maoAposta;
-	}
+    @Override
+    public ArrayList<Double> visit(Euristica euristica) {
+        return euristica.accept(this);
+    }
 
-	public int jogadosPeloAtual() {
-		return jogados;
-	}
+    public ArrayList<ArrayList<Integer>> getMaoAposta() {
+        return maoAposta;
+    }
 
-	public int getJogadorAtual() {
-		return jogadorAtual;
-	}
+    public int jogadosPeloAtual() {
+        return jogados;
+    }
 
-	private boolean unique(int curIndex, int value) {
-		for (int i = 0; i < curIndex; ++i) {
-			if (maoAposta.get(i).get(1) == value) {
-				return false;
-			}
-		}
-		return true;
-	}
+    public int getJogadorAtual() {
+        return jogadorAtual;
+    }
 
-	private ArrayList<ArrayList<Integer>> maoAposta;
-	private int jogados;
-	private int jogadorAtual;
-	private int maxJogadores;
+    //Verifica se algum jogador anterior ao atual já apostou a mesma aposta(Não permissivel)
+    private boolean apostaUnica(int curIndex, int value) {
+        for (int i = 0; i < curIndex; ++i) {
+            if (maoAposta.get(i).get(1) == value) {
+                return false;
+            }
+        }
+        return true;
+    }
 
 }
