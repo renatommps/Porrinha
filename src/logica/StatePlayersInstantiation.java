@@ -1,5 +1,9 @@
 package logica;
 
+import java.util.Collections;
+import java.util.List;
+import java.util.Random;
+
 import controle.ControladorDeJogo;
 
 public class StatePlayersInstantiation implements State {
@@ -19,6 +23,12 @@ public class StatePlayersInstantiation implements State {
 			controladorDeJogo.addJogador(novoJogadorHumano);
 		}
 
+		// embaralha a ordem inicial dos jogadores
+		List<Jogador> jogadores = controladorDeJogo.getJogadores();
+		long semente = System.nanoTime();
+		Collections.shuffle(jogadores, new Random(semente));
+
+		// define próximo estado
 		context.setState(new StateDefineJogadasDaRodada());
 	}
 

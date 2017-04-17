@@ -7,8 +7,10 @@ import java.util.Scanner;
 import controle.ControladorDeJogo;
 import logica.Aposta;
 import logica.HistoricoDeRodadas;
+import logica.Jogada;
 import logica.Jogador;
 import logica.JogadorIA;
+import logica.Rodada;
 
 public class ConsoleInterface extends UserInterface {
 
@@ -33,6 +35,7 @@ public class ConsoleInterface extends UserInterface {
 		System.out.println("Quantos jogadores humanos o jogo irá ter ? (mínimo 0, máximo 5)");
 		int numeroDeJogadoresHumanos = scanner.nextInt(); // checagem de erros
 															// seria bom né :)
+		scanner.nextLine(); // lê o enter para não atrapalhar a próxima leitura
 		controlador.setNumeroDeJogadoresHumanos(numeroDeJogadoresHumanos);
 	}
 
@@ -64,6 +67,8 @@ public class ConsoleInterface extends UserInterface {
 		// lê a jogada do jogador
 		int palitosJogados = scanner.nextInt();
 
+		scanner.nextLine(); // lê o enter para não atrapalhar a próxima leitura
+
 		return palitosJogados;
 	}
 
@@ -74,6 +79,7 @@ public class ConsoleInterface extends UserInterface {
 		int quantidadeDeJogadores = jogadores.size();
 		int totalDePalitosNoJogo = getTotalDePalitosNoJogo(jogadores);
 		List<Aposta> apostasDaRodada = historicoDeRodadas.getUltimaRodada().getApostas();
+		int palistosApostados = 0;
 
 		// exibe a quantidade de jogadores e o total de palitos em jogo
 		System.out.println("Quantidade de jogadores em jogo: " + quantidadeDeJogadores);
@@ -88,11 +94,28 @@ public class ConsoleInterface extends UserInterface {
 			System.out.println(); // deixa uma linha em branco
 		}
 
-		// pergunta qual aposta o jogador fará
-		System.out.println("Jogador " + jogador.getNome() + ", qual será a sua aposta para a rodada ? ");
+		// pergunta qual aposta o jogador fará (até fazer uma aposta válida)
+		boolean apostaValida = false;
+		while (!apostaValida) {
+			System.out.println("Jogador " + jogador.getNome() + ", qual será a sua aposta para a rodada ? ");
 
-		// lê a aposta do jogador
-		int palistosApostados = scanner.nextInt();
+			// lê a aposta do jogador
+			palistosApostados = scanner.nextInt();
+
+			// verifica se é uma aposta válida
+			if (!apostasDaRodada.isEmpty()) {
+				for (Aposta aposta : apostasDaRodada) {
+					if (aposta.getNumeroDePalitosApostados() == palistosApostados) {
+						System.out.println("Aposta \"" + palistosApostados + "\"já feita, faça outra!");
+						scanner.nextLine();
+					} else {
+						apostaValida = true;
+					}
+				}
+			} else {
+				apostaValida = true; // se ninguém mais apostou, então não precisa checar
+			}
+		}
 
 		return palistosApostados;
 	}
@@ -123,7 +146,7 @@ public class ConsoleInterface extends UserInterface {
 			System.out.println("Treinem mais humanos ;)");
 		} else {
 			System.out.println("Vencedor Humano: " + vencedor.getNome());
-			System.out.println("Parabéns humanos! good monkey ;)");
+			System.out.println("Parabéns humano! good monkey ;)");
 		}
 	}
 
@@ -140,6 +163,7 @@ public class ConsoleInterface extends UserInterface {
 				}
 			} catch (InputMismatchException e) {
 				System.out.println("Opçao inválida! Digite corretamente humano.");
+				scanner.nextLine();
 			}
 		} while (!escolhaDefinida);
 
@@ -150,5 +174,30 @@ public class ConsoleInterface extends UserInterface {
 	public void exibeTelaDeSaidaDoJogo() {
 		System.out.println("Adeus humanos, foi um prezer o entreter :)");
 		System.out.println("Volte sempre ao maravilhoso jogo de Porrinha!");
+	}
+
+	@Override
+	public void exibeTelaResultadoDaRodada(Jogador vencedor, Rodada rodadaAtual) {
+		List<Jogada> jogadas = rodadaAtual.getJogadas();
+		List<Aposta> apostas = rodadaAtual.getApostas();
+
+		System.out.println(" *** Resultado da rodada ***");
+		System.out.println("Jogadas:");
+		for (Jogada jogada : jogadas) {
+			System.out
+					.println("Jogador: " + jogada.getJogador().getNome() + ", jogada: " + jogada.getPalistosJogados());
+		}
+
+		System.out.println("Apostas:");
+		for (Aposta aposta : apostas) {
+			System.out.println(
+					"Jogador: " + aposta.getJogador().getNome() + ", aposta: " + aposta.getNumeroDePalitosApostados());
+		}
+
+		if (vencedor != null) {
+			System.out.println("Jogador " + vencedor.getNome() + " acertou o resultado!");
+		} else {
+			System.out.println("Ninguém acertou!");
+		}
 	}
 }

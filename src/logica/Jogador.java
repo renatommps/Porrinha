@@ -9,6 +9,7 @@ public abstract class Jogador {
 
 	public Jogador(String nome) {
 		this.nome = nome;
+		palitos = 3;
 	}
 
 	public String getNome() {

@@ -4,6 +4,7 @@ import java.util.List;
 
 import logica.HistoricoDeRodadas;
 import logica.Jogador;
+import logica.Rodada;
 
 public interface Interface {
 
@@ -22,5 +23,7 @@ public interface Interface {
 	public boolean exibeMenuDefinicaoDeReinicioDeJogo();
 
 	public void exibeTelaDeSaidaDoJogo();
+
+	public void exibeTelaResultadoDaRodada(Jogador vencedor, Rodada rodadaAtual);
 
 }

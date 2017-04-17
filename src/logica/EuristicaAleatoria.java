@@ -46,7 +46,6 @@ public class EuristicaAleatoria implements Euristica {
 		// jogadores
 		while (!apostaConcretizada) {
 			aposta = apostaMinima + (int) (Math.random() * ((totalDePalitosNoJogo - apostaMinima) + 1));
-
 			if (!apostaJafeita(aposta, apostasDaRodada)) {
 				apostaConcretizada = true;
 			}
@@ -56,12 +55,12 @@ public class EuristicaAleatoria implements Euristica {
 	}
 
 	private boolean apostaJafeita(int aposta, List<Aposta> apostasDaRodada) {
-		boolean apostaFeita = true;
+		boolean apostaFeita = false;
 
 		if (!apostasDaRodada.isEmpty()) {
 			for (Aposta apostaAtual : apostasDaRodada) {
 				if (aposta == apostaAtual.getNumeroDePalitosApostados()) {
-					apostaFeita = false;
+					apostaFeita = true;
 					break;
 				}
 			}

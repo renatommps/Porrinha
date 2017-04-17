@@ -32,17 +32,29 @@ public class StateEncerraRodada implements State {
 
 		Jogador vencedor = rodadaAtual.getVencedor(); // vencedor da rodada
 
+		// exibe resultado da rodada
+		controladorDeJogo.chamaTelaResultadoDaRodada(vencedor, rodadaAtual);
+
 		if (vencedor != null) { // se alguém tiver vencido a rodada
 			// verifica se o vencedor não tem mais palitos
 			if (vencedor.getPalitos() == 0) {
 				// termina o jogo
 				context.setState(new StateFimDeJogo());
 			} else { // vai para a próxima rodada
-				context.setState(new StateDefineApostasDaRodada());
+				// coloca o vencedor como primeiro para apostar
+				redefineOrdemDeJogadas(vencedor, controladorDeJogo);
+				// define próximo estado
+				context.setState(new StateDefineJogadasDaRodada());
 			}
 		} else { // se ninguém tiver vencido, vai para a próxima rodada
-			context.setState(new StateDefineApostasDaRodada());
+			context.setState(new StateDefineJogadasDaRodada());
 		}
+	}
+
+	private void redefineOrdemDeJogadas(Jogador vencedor, ControladorDeJogo controladorDeJogo) {
+		List<Jogador> jogadores = controladorDeJogo.getJogadores();
+		jogadores.remove(vencedor);
+		jogadores.add(0, vencedor);
 	}
 
 	private int getPalitosJogadosNaRodada(Rodada rodadaAtual) {

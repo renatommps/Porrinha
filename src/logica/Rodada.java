@@ -33,7 +33,7 @@ public class Rodada {
 		this.numeroDePalitosJogados = numeroDePalitosJogados;
 	}
 
-	public List<Jogada> getJogadas() {
+	public List<Jogada> rodadaAtual() {
 		return jogadas;
 	}
 
@@ -47,5 +47,9 @@ public class Rodada {
 
 	public void addAposta(Aposta aposta) {
 		apostas.add(aposta);
+	}
+
+	public List<Jogada> getJogadas() {
+		return jogadas;
 	}
 }

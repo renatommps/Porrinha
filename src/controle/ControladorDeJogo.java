@@ -124,4 +124,8 @@ public class ControladorDeJogo {
 	public void chamaTelaDeSaidaDoJogo() {
 		userInterface.exibeTelaDeSaidaDoJogo();
 	}
+
+	public void chamaTelaResultadoDaRodada(Jogador vencedor, Rodada rodadaAtual) {
+		userInterface.exibeTelaResultadoDaRodada(vencedor, rodadaAtual);
+	}
 }
