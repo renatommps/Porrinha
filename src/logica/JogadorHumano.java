@@ -1,5 +1,7 @@
 package logica;
 
+import java.util.List;
+
 public class JogadorHumano extends Jogador {
 
 	public JogadorHumano(String nome) {
@@ -8,15 +10,15 @@ public class JogadorHumano extends Jogador {
 	}
 
 	@Override
-	public void decidirJogada() {
+	public Jogada decidirJogada(HistoricoDeRodadas historicoDeRodadas, List<Jogador> jogadores) {
 		// TODO Auto-generated method stub
-
+		return null;
 	}
 
 	@Override
-	public void estimarResultado(Rodada rodada) {
+	public Aposta decidirApostaDeResultado(HistoricoDeRodadas historicoDeRodadas, List<Jogador> jogadores) {
 		// TODO Auto-generated method stub
-
+		return null;
 	}
 
 }

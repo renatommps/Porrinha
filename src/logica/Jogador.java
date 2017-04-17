@@ -1,10 +1,12 @@
 package logica;
 
+import java.util.List;
+
 public abstract class Jogador {
 
-	private String nome;
-	private int palitos;
-	
+	protected String nome;
+	protected int palitos;
+
 	public Jogador(String nome) {
 		this.nome = nome;
 	}
@@ -13,10 +15,6 @@ public abstract class Jogador {
 		return nome;
 	}
 
-	abstract public void decidirJogada();
-
-	abstract public void estimarResultado(Rodada rodada);
-
 	public int getPalitos() {
 		return palitos;
 	}
@@ -24,5 +22,9 @@ public abstract class Jogador {
 	public void decrementPalitos() {
 		palitos--;
 	}
+
+	abstract public Jogada decidirJogada(HistoricoDeRodadas historicoDeRodadas, List<Jogador> jogadores);
+
+	abstract public Aposta decidirApostaDeResultado(HistoricoDeRodadas historicoDeRodadas, List<Jogador> jogadores);
 
 }

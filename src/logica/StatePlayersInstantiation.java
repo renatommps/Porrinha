@@ -19,7 +19,7 @@ public class StatePlayersInstantiation implements State {
 			controladorDeJogo.addJogador(novoJogadorHumano);
 		}
 
-		context.setState(new StateRoundSetMove());
+		context.setState(new StateDefineJogadasDaRodada());
 	}
 
 }

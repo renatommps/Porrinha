@@ -23,4 +23,14 @@ public class HistoricoDeRodadas {
 		rodadas.add(rodada);
 	}
 
+	public Rodada getUltimaRodada() {
+		if (rodadas == null || rodadas.isEmpty()) {
+			return null;
+		}
+		return rodadas.get(rodadas.size() - 1);
+	}
+
+	public boolean estaVazio() {
+		return rodadas.isEmpty();
+	}
 }

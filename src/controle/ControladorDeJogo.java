@@ -22,11 +22,12 @@ public class ControladorDeJogo {
 	private int numeroDeJogadoresIA;
 	private int numeroDeJogadoresHumanos;
 
-	// lógica, controle de estados
+	// lógica, controle de estados do jogo (inicio, insanciação de jogadores,
+	// partida, etc..)
 	final StateContext gameState;
 
 	public ControladorDeJogo() {
-		setHistoricoDeRodadas(new HistoricoDeRodadas());
+		historicoDeRodadas = new HistoricoDeRodadas();
 
 		jogadores = new ArrayList<Jogador>();
 
@@ -66,20 +67,8 @@ public class ControladorDeJogo {
 		return jogadores;
 	}
 
-	public void chamaMenuInicial() {
-		userInterface.exibeMenuInicial();
-	}
-
-	public void chamaMenuDeDefinicaoDeJogadas() {
-		userInterface.exibeMenuDeDefinicaoDeJogadas();
-	}
-
-	public String chamaMenuDeEntradaDeDadosJogadorHumano(int indiceJogador) {
-		String nomeJogadorHumano = null;
-
-		nomeJogadorHumano = userInterface.exibeMenuDeEntradaDeDadosJogadorHumano(indiceJogador);
-
-		return nomeJogadorHumano;
+	public void setJogadores(List<Jogador> jogadores) {
+		this.jogadores = jogadores;
 	}
 
 	public HistoricoDeRodadas getHistoricoDeRodadas() {
@@ -94,4 +83,45 @@ public class ControladorDeJogo {
 		historicoDeRodadas.addRodada(rodada);
 	}
 
+	public void chamaMenuInicial() {
+		userInterface.exibeMenuInicial();
+	}
+
+	public String chamaMenuDeEntradaDeDadosJogadorHumano(int indiceJogador) {
+		String nomeJogadorHumano = null;
+
+		nomeJogadorHumano = userInterface.exibeMenuDeEntradaDeDadosJogadorHumano(indiceJogador);
+
+		return nomeJogadorHumano;
+	}
+
+	public int chamaMenuDefinicaoJogadaJogadorHumano(Jogador jogador, List<Jogador> jogadores,
+			HistoricoDeRodadas historicoDeRodadas) {
+		int palistosJogados = userInterface.exibeMenuDeDefinicaoDeJogadaJogadorHumano(jogador, jogadores,
+				historicoDeRodadas);
+
+		return palistosJogados;
+	}
+
+	public int chamaMenuDefinicaoApostaJogadorHumano(HistoricoDeRodadas historicoDeRodadas, List<Jogador> jogadores,
+			Jogador jogador) {
+		int palistosApostados = userInterface.exibeMenuDeDefinicaoDeApostaJogadorHumano(historicoDeRodadas, jogadores,
+				jogador);
+
+		return palistosApostados;
+	}
+
+	public void chamaTelaDeResultadoDoJogo(HistoricoDeRodadas historicoDeRodadas, List<Jogador> jogadores) {
+		userInterface.exibeTelaDeResultadoDoJogo(historicoDeRodadas, jogadores);
+	}
+
+	public boolean chamaMenuDefinicaoDeReinicioDeJogo() {
+		boolean reiniciJogo = userInterface.exibeMenuDefinicaoDeReinicioDeJogo();
+
+		return reiniciJogo;
+	}
+
+	public void chamaTelaDeSaidaDoJogo() {
+		userInterface.exibeTelaDeSaidaDoJogo();
+	}
 }
