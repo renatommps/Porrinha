@@ -22,15 +22,15 @@ public class Porrinha {
 			toAdd.add(-1);
 			inicio.add(toAdd);
 		}
-		ArvoreMiniMax teste = new ArvoreMiniMax(new EstadoPorrinha(inicio, 2, 0, 3), new EuristicaPossibilidade(), 1, 3);
-		System.out.println("Jogada 1");
-		EstadoArvore result = teste.getJogada();
-		teste = new ArvoreMiniMax(result, new EuristicaPossibilidade(), 1, 3);
-		System.out.println("Jogada 2");
-		result = teste.getJogada();
-		teste = new ArvoreMiniMax(result, new EuristicaPossibilidade(), 1, 3);
-		System.out.println("Jogada 3");
-		result = teste.getJogada();
+		ArvoreMiniMax teste = new ArvoreMiniMax(new EstadoPorrinha(inicio, 2, 0, 3), new EuristicaPossibilidade(), 5, 3);
+		EstadoPorrinha result = (EstadoPorrinha)teste.getJogada();
+		System.out.println(result.getMaoAposta());
+		//teste = new ArvoreMiniMax(result, new EuristicaPossibilidade(), 5, 3);
+		//System.out.println("Jogada 2");
+		//result = teste.getJogada();
+		//teste = new ArvoreMiniMax(result, new EuristicaPossibilidade(), 5, 3);
+		//System.out.println("Jogada 3");
+		//result = teste.getJogada();
 		//ControladorDeJogo controlador = new ControladorDeJogo();
 		//controlador.iniciaJogo();
 		

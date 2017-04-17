@@ -9,9 +9,9 @@ public class EstadoPorrinha implements EstadoArvore {
 		this.jogados = jogados;
 		this.jogadorAtual = jogadorAtual;
 		this.maxJogadores = maxJogadores;
-		System.out.println(maoAposta);
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public ArrayList<EstadoArvore> transicoes() {
 		ArrayList<EstadoArvore> ret = new ArrayList<EstadoArvore>();
@@ -22,8 +22,10 @@ public class EstadoPorrinha implements EstadoArvore {
 		}
 		for (int i = 0; i <= sum; ++i) {
 			if (unique(jogadorAtual, i)) {
-
-				ArrayList<ArrayList<Integer>> novo = new ArrayList<ArrayList<Integer>>(maoAposta);
+				ArrayList<ArrayList<Integer>> novo = new ArrayList<ArrayList<Integer>>();
+				for(ArrayList<Integer> toClone: maoAposta) {
+					novo.add((ArrayList<Integer>)toClone.clone());
+				}
 				ArrayList<Integer> apostaJogadorAtual = novo.get(jogadorAtual);
 				apostaJogadorAtual.set(1, i);
 				novo.set(jogadorAtual, apostaJogadorAtual);

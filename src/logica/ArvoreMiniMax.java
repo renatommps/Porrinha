@@ -64,6 +64,10 @@ public class ArvoreMiniMax {
 			for (EstadoArvore novoEstado : estado.transicoes()) {
 				Nodo filho = new Nodo(novoEstado, profundidade + 1);
 				filho.criaFilhos();
+				/////////////
+				EstadoPorrinha teste = (EstadoPorrinha) filho.estado;
+				//System.out.println(teste.getMaoAposta());
+				/////////////
 				filhos.add(filho);
 			}
 			int index = profundidade % numJogadores;
