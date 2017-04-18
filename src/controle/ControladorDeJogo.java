@@ -37,10 +37,10 @@ public class ControladorDeJogo {
 	}
 
 	public void iniciaJogo() {
-
 		while (!(gameState.getState() instanceof StateExit)) {
 			gameState.process();
 		}
+		gameState.process(); // processa o StateExit
 	}
 
 	public int getNumeroDeJogadoresIA() {

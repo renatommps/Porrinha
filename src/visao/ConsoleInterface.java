@@ -156,18 +156,19 @@ public class ConsoleInterface extends UserInterface {
 		boolean escolhaDefinida = false;
 		do {
 			try {
-				System.out.print("Deseja recomeçar o jogo? (\"true\", se sim, \"false\", se não");
+				System.out.println("Deseja recomeçar o jogo? (\"true\", se sim, \"false\", se não)");
 				reinicioDeJogo = scanner.nextBoolean();
-				if (reinicioDeJogo == true || reinicioDeJogo == false) {
-					escolhaDefinida = true;
-				}
+				escolhaDefinida = true;
+//				if (reinicioDeJogo == true || reinicioDeJogo == false) {
+//					escolhaDefinida = true;
+//				}
 			} catch (InputMismatchException e) {
 				System.out.println("Opçao inválida! Digite corretamente humano.");
 				scanner.nextLine();
 			}
 		} while (!escolhaDefinida);
 
-		return reinicioDeJogo;
+		return !reinicioDeJogo;
 	}
 
 	@Override

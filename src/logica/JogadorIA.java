@@ -4,9 +4,9 @@ import java.util.List;
 
 public class JogadorIA extends Jogador {
 
-	Euristica euristica;
+	Estrategia euristica;
 
-	public JogadorIA(String nome, Euristica euristica) {
+	public JogadorIA(String nome, Estrategia euristica) {
 		super(nome);
 		this.euristica = euristica;
 	}

@@ -31,8 +31,8 @@ public class StateFimDeJogo implements State {
 			controladorDeJogo.setHistoricoDeRodadas(new HistoricoDeRodadas());
 			controladorDeJogo.setJogadores(new ArrayList<Jogador>());
 
-			// volta para a tela de instanciação de jogadores
-			context.setState(new StatePlayersInstantiation());
+			// volta para a tela inicial
+			context.setState(new StateStart());
 		}
 	}
 

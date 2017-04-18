@@ -2,7 +2,7 @@ package logica;
 
 import java.util.List;
 
-public interface Euristica {
+public interface Estrategia {
 
 	int definirJogada(HistoricoDeRodadas historicoDeRodadas, int palitos, List<Jogador> jogadores);
 

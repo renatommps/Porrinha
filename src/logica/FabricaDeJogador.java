@@ -11,7 +11,7 @@ public class FabricaDeJogador {
 			return null;
 		}
 		if (tipo.equalsIgnoreCase("ALEATORIO")) {
-			return new JogadorIA(nome, new EuristicaAleatoria());
+			return new JogadorIA(nome, new EstrategiaAleatoria());
 		}
 
 		return null;

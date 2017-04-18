@@ -2,9 +2,9 @@ package logica;
 
 import java.util.List;
 
-public class EuristicaAleatoria implements Euristica {
+public class EstrategiaAleatoria implements Estrategia {
 
-	public EuristicaAleatoria() {
+	public EstrategiaAleatoria() {
 		// TODO Auto-generated constructor stub
 	}
 
