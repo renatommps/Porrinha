@@ -9,7 +9,7 @@ public class EstrategiaAleatoria implements Estrategia {
 	}
 
 	@Override
-	public int definirJogada(HistoricoDeRodadas historicoDeRodadas, int palitos, List<Jogador> jogadores) {
+	public int definirJogada(HistoricoDeRodadas historicoDeRodadas, int palitosDoJogador, List<Jogador> jogadores) {
 		// OBS: O histórico não está sendo usado, deixei ai caso alguma
 		// euristica vá usar...
 
@@ -20,13 +20,14 @@ public class EstrategiaAleatoria implements Estrategia {
 			jogadaMinima = 1;
 		}
 
-		int palistosJogados = jogadaMinima + (int) (Math.random() * ((palitos - jogadaMinima) + 1));
+		int palistosJogados = jogadaMinima + (int) (Math.random() * ((palitosDoJogador - jogadaMinima) + 1));
 
 		return palistosJogados;
 	}
 
 	@Override
-	public int definirApostaDeResultado(HistoricoDeRodadas historicoDeRodadas, List<Jogador> jogadores) {
+	public int definirApostaDeResultado(HistoricoDeRodadas historicoDeRodadas, List<Jogador> jogadores,
+			int palitosDoJogador) {
 		// OBS: O histórico não está sendo usado, deixei ai caso alguma
 		// euristica vá usar...
 
@@ -34,7 +35,7 @@ public class EstrategiaAleatoria implements Estrategia {
 		List<Aposta> apostasDaRodada = historicoDeRodadas.getUltimaRodada().getApostas();
 		int totalDePalitosNoJogo = getTotalDePalitosNoJogo(jogadores);
 		int apostaMinima = 0;
-		int aposta = 0;
+		int valorDaAposta = 0;
 
 		// primeira rodada, regra especial que não pode jogar zero
 		if (historicoDeRodadas.estaVazio()) {
@@ -45,13 +46,36 @@ public class EstrategiaAleatoria implements Estrategia {
 		// faz uma aposta aleatória, excluíndo valores já apostados por outros
 		// jogadores
 		while (!apostaConcretizada) {
-			aposta = apostaMinima + (int) (Math.random() * ((totalDePalitosNoJogo - apostaMinima) + 1));
-			if (!apostaJafeita(aposta, apostasDaRodada)) {
+
+//			// utiliza o valor de palitos jogados pelo jogador para iniciar o
+//			// valor total das apostas
+//			valorDaAposta += palitosDoJogador;
+//
+//			// analisa as apostas já feitas para tentar inferir valores mais
+//			// concretos para os jogadores que já apostaram
+//			for (Aposta aposta : apostasDaRodada) {
+//
+//			}
+//			
+//			// para cada jogador (que já não fez uma aposta), faz um chute do
+//			// valor que o mesmo jogou, e soma com o valor dos demais jogadores
+//			// para obter o valor total da aposta
+//			for (Jogador jogador : jogadores) {
+//				// verifica se o jogador não está na lista de apostas já feitas
+//				if (jogador não ta na lista){ // IMPLEMENTAR DEPOIS!!!!!
+//					int apostaDeJogada = apostaMinima + (int) (Math.random() * ((jogador.getPalitos() - apostaMinima) + 1));
+//					valorDaAposta += apostaDeJogada;
+//				}
+//			}
+			
+			valorDaAposta = apostaMinima + (int) (Math.random() * ((totalDePalitosNoJogo - apostaMinima) + 1));
+
+			if (!apostaJafeita(valorDaAposta, apostasDaRodada)) {
 				apostaConcretizada = true;
 			}
 		}
 
-		return aposta;
+		return valorDaAposta;
 	}
 
 	private boolean apostaJafeita(int aposta, List<Aposta> apostasDaRodada) {

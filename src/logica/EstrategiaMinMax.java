@@ -18,13 +18,13 @@ public class EstrategiaMinMax implements Estrategia {
 	// aqui eu implemento quaisquer outros métodos privados que precisar
 	
 	@Override
-	public int definirJogada(HistoricoDeRodadas historicoDeRodadas, int palitos, List<Jogador> jogadores) {
+	public int definirJogada(HistoricoDeRodadas historicoDeRodadas, int palitosDoJogador, List<Jogador> jogadores) {
 		// TODO Auto-generated method stub
 		return 0;
 	}
 
 	@Override
-	public int definirApostaDeResultado(HistoricoDeRodadas historicoDeRodadas, List<Jogador> jogadores) {
+	public int definirApostaDeResultado(HistoricoDeRodadas historicoDeRodadas, List<Jogador> jogadores, int palitosDoJogador) {
 		// TODO Auto-generated method stub
 		return 0;
 	}
