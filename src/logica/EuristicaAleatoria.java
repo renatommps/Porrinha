@@ -9,12 +9,8 @@ public class EuristicaAleatoria extends Euristica {
 	}
 
 	@Override
-	public ArrayList<Double> accept(EstadoPorrinha estado) {
-		ArrayList<Double> ret = new ArrayList<Double>();
-		for(int i = 0; i < estado.numJogadores(); ++i) {
-			ret.add(new Double(Math.random()));
-		}
-		return ret;
+	public double accept(EstadoPorrinha estado) {
+		return Math.random();
 	}
 
 	

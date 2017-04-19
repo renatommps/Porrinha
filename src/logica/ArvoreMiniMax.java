@@ -6,11 +6,14 @@ import java.util.Comparator;
 
 public class ArvoreMiniMax {
 
-	public ArvoreMiniMax(EstadoArvore inicial, Euristica euristica, int profundidade, int numJogadores)
+	
+
+	public ArvoreMiniMax(EstadoArvore inicial, Euristica euristica, int profundidade, int numJogadores, int jogadorAtual)
 			throws NumeroDeJogadoresException {
 		if (numJogadores < 2) {
 			throw new NumeroDeJogadoresException(numJogadores);
 		}
+		this.jogadorAtual = jogadorAtual;
 		this.profundidadeMax = profundidade;
 		this.euristica = euristica;
 		this.numJogadores = numJogadores;
@@ -39,17 +42,31 @@ public class ArvoreMiniMax {
 
 			@Override
 			public int compare(Nodo lhs, Nodo rhs) {
-				double valLeft = lhs.vetorGanhos.get(index).doubleValue();
-				double valRight = rhs.vetorGanhos.get(index).doubleValue();
-				if(valLeft < valRight) {
-					return -1;
-				}
-				else if(valLeft == valRight) {
-					return 0;
+				double valLeft = lhs.vetorGanhos;
+				double valRight = rhs.vetorGanhos;
+				if(index == jogadorAtual) {
+					if(valLeft < valRight) {
+						return -1;
+					}
+					else if(valLeft == valRight) {
+						return 0;
+					}
+					else {
+						return 1;
+					}
 				}
 				else {
-					return 1;
+					if(valLeft < valRight) {
+						return 1;
+					}
+					else if(valLeft == valRight) {
+						return 0;
+					}
+					else {
+						return -1;
+					}
 				}
+				
 			}
 
 			private int index;
@@ -64,25 +81,25 @@ public class ArvoreMiniMax {
 			for (EstadoArvore novoEstado : estado.transicoes()) {
 				Nodo filho = new Nodo(novoEstado, profundidade + 1);
 				filho.criaFilhos();
+				/////////////
+				EstadoPorrinha teste = (EstadoPorrinha) filho.estado;
+				//System.out.println(teste.getMaoAposta());
+				/////////////
 				filhos.add(filho);
 			}
-			int index = profundidade % numJogadores;
+			int index = (jogadorAtual + profundidade) % numJogadores;
 			NodoCompare compare = new NodoCompare(index);
 			Nodo max = Collections.max(filhos, compare);
-			vetorGanhos = max.getVetorGanhos();
+			vetorGanhos = max.vetorGanhos;
 			best = max;
 			return true;
-		}
-
-		private ArrayList<Double> getVetorGanhos() {
-			return vetorGanhos;
 		}
 
 		private ArrayList<Nodo> filhos;
 		
 		private Nodo best;
 
-		private ArrayList<Double> vetorGanhos;
+		private double vetorGanhos;
 
 		private EstadoArvore estado;
 
@@ -94,6 +111,8 @@ public class ArvoreMiniMax {
 
 	}
 
+	private int jogadorAtual;
+	
 	private int profundidadeMax;
 
 	private Nodo raiz;

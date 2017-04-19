@@ -1,19 +1,31 @@
 package logica;
 
+import java.util.List;
+
 public abstract class Jogador {
 
-	private String nome;
+	protected String nome;
+	protected int palitos;
 
 	public Jogador(String nome) {
 		this.nome = nome;
+		palitos = 3;
 	}
 
 	public String getNome() {
 		return nome;
 	}
 
-	abstract public void decidirJogada();
+	public int getPalitos() {
+		return palitos;
+	}
 
-	abstract public void estimarResultado(Rodada rodada);
+	public void decrementPalitos() {
+		palitos--;
+	}
+
+	abstract public Jogada decidirJogada(HistoricoDeRodadas historicoDeRodadas, List<Jogador> jogadores);
+
+	abstract public Aposta decidirApostaDeResultado(HistoricoDeRodadas historicoDeRodadas, List<Jogador> jogadores, int palitosJogados);
 
 }

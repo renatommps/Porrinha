@@ -6,8 +6,7 @@ public class StateExit implements State {
 
 	@Override
 	public void process(StateContext context, ControladorDeJogo controladorDeJogo) {
-		// TODO Auto-generated method stub
-
+		// mostra resultado do jogo
+		controladorDeJogo.chamaTelaDeSaidaDoJogo();
 	}
-
 }

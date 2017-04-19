@@ -1,24 +1,34 @@
 package logica;
 
+import java.util.List;
+
 public class JogadorIA extends Jogador {
 
-	Euristica euristica;
+	Estrategia euristica;
 
-	public JogadorIA(String nome, Euristica euristica) {
+	public JogadorIA(String nome, Estrategia euristica) {
 		super(nome);
 		this.euristica = euristica;
 	}
 
 	@Override
-	public void decidirJogada() {
-		// TODO Auto-generated method stub
-		
+	public Jogada decidirJogada(HistoricoDeRodadas historicoDeRodadas, List<Jogador> jogadores) {
+		Jogada jogada = new Jogada(this);
+		int palistosJogados = euristica.definirJogada(historicoDeRodadas, palitos, jogadores);
+
+		jogada.setPalistosJogados(palistosJogados);
+
+		return jogada;
 	}
 
 	@Override
-	public void estimarResultado(Rodada rodada) {
-		// TODO Auto-generated method stub
-		
-	}
+	public Aposta decidirApostaDeResultado(HistoricoDeRodadas historicoDeRodadas, List<Jogador> jogadores,
+			int palitosJogados) {
+		Aposta aposta = new Aposta(this);
+		int totalDePalitosApostados = euristica.definirApostaDeResultado(historicoDeRodadas, jogadores, palitosJogados, palitos);
 
+		aposta.setNumeroDePalitosApostados(totalDePalitosApostados);
+
+		return aposta;
+	}
 }
