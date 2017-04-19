@@ -57,7 +57,7 @@ public class EstrategiaMinMax implements Estrategia {
 		}
 		EstadoPorrinha estado = new EstadoPorrinha(situacaoAtual, palitosJogados, atual.getApostas().size(), jogadores.size());
 		try {
-			ArvoreMiniMax arvore = new ArvoreMiniMax(estado, euristica, 8, jogadores.size(), atual.getApostas().size());
+			ArvoreMiniMax arvore = new ArvoreMiniMax(estado, euristica, 5, jogadores.size(), atual.getApostas().size());
 			EstadoPorrinha proximo = (EstadoPorrinha)arvore.getJogada();
 			ArrayList<ArrayList<Integer>> juninhos = proximo.getMaoAposta();
 			

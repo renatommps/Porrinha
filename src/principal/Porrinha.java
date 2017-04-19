@@ -13,7 +13,6 @@ import logica.NumeroDeJogadoresException;
 
 
 
-public class Porrinha {
 
 	public static void main(String[] args) {
 		ControladorDeJogo controlador = new ControladorDeJogo();
