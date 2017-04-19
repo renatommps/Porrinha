@@ -93,7 +93,7 @@ public class EstrategiaAleatoria implements Estrategia {
 		// // verifica se a aposta foi feita com sucesso
 		// if (!apostaJafeita(valorDaAposta, apostasDaRodada)) {
 		// apostaConcretizada = true;
-		// }
+		// } 
 
 		return valorDaAposta;
 	}
