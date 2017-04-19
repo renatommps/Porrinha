@@ -1,10 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="4143dffc-0754-435a-b1fd-6726e657a030" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/logica/EstrategiaMinMax.java" afterPath="$PROJECT_DIR$/src/logica/EstrategiaMinMax.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/principal/Porrinha.java" afterPath="$PROJECT_DIR$/src/principal/Porrinha.java" />
-    </list>
+    <list default="true" id="4143dffc-0754-435a-b1fd-6726e657a030" name="Default" comment="" />
     <ignored path="$PROJECT_DIR$/bin/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -584,12 +581,12 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1492631100148</updated>
-      <workItem from="1492631103382" duration="2133000" />
+      <workItem from="1492631103382" duration="2822000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="2133000" />
+    <option name="totallyTimeSpent" value="2822000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1366" height="738" extended-state="7" />
