@@ -16,7 +16,8 @@ public class JogadorHumano extends Jogador {
 	}
 
 	@Override
-	public Aposta decidirApostaDeResultado(HistoricoDeRodadas historicoDeRodadas, List<Jogador> jogadores) {
+	public Aposta decidirApostaDeResultado(HistoricoDeRodadas historicoDeRodadas, List<Jogador> jogadores,
+			int palitosJogados) {
 		// TODO Auto-generated method stub
 		return null;
 	}

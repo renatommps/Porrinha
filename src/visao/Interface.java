@@ -24,6 +24,6 @@ public interface Interface {
 
 	public void exibeTelaDeSaidaDoJogo();
 
-	public void exibeTelaResultadoDaRodada(Jogador vencedor, Rodada rodadaAtual);
+	public void exibeTelaResultadoDaRodada(Jogador vencedor, Rodada rodadaAtual, List<Jogador> jogadores, int numeroDaRodada);
 
 }

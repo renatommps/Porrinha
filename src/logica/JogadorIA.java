@@ -22,9 +22,10 @@ public class JogadorIA extends Jogador {
 	}
 
 	@Override
-	public Aposta decidirApostaDeResultado(HistoricoDeRodadas historicoDeRodadas, List<Jogador> jogadores) {
+	public Aposta decidirApostaDeResultado(HistoricoDeRodadas historicoDeRodadas, List<Jogador> jogadores,
+			int palitosJogados) {
 		Aposta aposta = new Aposta(this);
-		int totalDePalitosApostados = euristica.definirApostaDeResultado(historicoDeRodadas, jogadores, palitos);
+		int totalDePalitosApostados = euristica.definirApostaDeResultado(historicoDeRodadas, jogadores, palitosJogados, palitos);
 
 		aposta.setNumeroDePalitosApostados(totalDePalitosApostados);
 

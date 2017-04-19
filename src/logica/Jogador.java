@@ -26,6 +26,6 @@ public abstract class Jogador {
 
 	abstract public Jogada decidirJogada(HistoricoDeRodadas historicoDeRodadas, List<Jogador> jogadores);
 
-	abstract public Aposta decidirApostaDeResultado(HistoricoDeRodadas historicoDeRodadas, List<Jogador> jogadores);
+	abstract public Aposta decidirApostaDeResultado(HistoricoDeRodadas historicoDeRodadas, List<Jogador> jogadores, int palitosJogados);
 
 }

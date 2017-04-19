@@ -24,7 +24,8 @@ public class EstrategiaMinMax implements Estrategia {
 	}
 
 	@Override
-	public int definirApostaDeResultado(HistoricoDeRodadas historicoDeRodadas, List<Jogador> jogadores, int palitosDoJogador) {
+	public int definirApostaDeResultado(HistoricoDeRodadas historicoDeRodadas, List<Jogador> jogadores,
+			int palitosJogados, int palitosDoJogador) {
 		// TODO Auto-generated method stub
 		return 0;
 	}

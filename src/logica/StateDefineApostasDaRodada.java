@@ -15,7 +15,8 @@ public class StateDefineApostasDaRodada implements State {
 
 		for (Jogador jogador : jogadores) {
 			if (jogador instanceof JogadorIA) {
-				Aposta aposta = jogador.decidirApostaDeResultado(historicoDeRodadas, jogadores);
+				int palitosJogados = getJogada(jogador, rodadaAtual);
+				Aposta aposta = jogador.decidirApostaDeResultado(historicoDeRodadas, jogadores, palitosJogados);
 				rodadaAtual.addAposta(aposta);
 			} else {
 				int palitosJogados = controladorDeJogo.chamaMenuDefinicaoApostaJogadorHumano(historicoDeRodadas,
@@ -26,6 +27,20 @@ public class StateDefineApostasDaRodada implements State {
 		}
 
 		context.setState(new StateEncerraRodada());
+	}
+
+	private int getJogada(Jogador jogador, Rodada rodadaAtual) {
+		int palitosJogados = 0;
+		List<Jogada> jogadas = rodadaAtual.getJogadas();
+
+		for (Jogada jogada : jogadas) {
+			if (jogada.getJogador().equals(jogador)) {
+				palitosJogados = jogada.getPalistosJogados();
+				break;
+			}
+		}
+
+		return palitosJogados;
 	}
 
 }

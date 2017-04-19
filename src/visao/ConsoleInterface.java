@@ -113,7 +113,8 @@ public class ConsoleInterface extends UserInterface {
 					}
 				}
 			} else {
-				apostaValida = true; // se ninguém mais apostou, então não precisa checar
+				apostaValida = true; // se ninguém mais apostou, então não
+										// precisa checar
 			}
 		}
 
@@ -159,9 +160,6 @@ public class ConsoleInterface extends UserInterface {
 				System.out.println("Deseja recomeçar o jogo? (\"true\", se sim, \"false\", se não)");
 				reinicioDeJogo = scanner.nextBoolean();
 				escolhaDefinida = true;
-//				if (reinicioDeJogo == true || reinicioDeJogo == false) {
-//					escolhaDefinida = true;
-//				}
 			} catch (InputMismatchException e) {
 				System.out.println("Opçao inválida! Digite corretamente humano.");
 				scanner.nextLine();
@@ -178,11 +176,19 @@ public class ConsoleInterface extends UserInterface {
 	}
 
 	@Override
-	public void exibeTelaResultadoDaRodada(Jogador vencedor, Rodada rodadaAtual) {
+	public void exibeTelaResultadoDaRodada(Jogador vencedor, Rodada rodadaAtual, List<Jogador> jogadores,
+			int numeroDaRodada) {
 		List<Jogada> jogadas = rodadaAtual.getJogadas();
 		List<Aposta> apostas = rodadaAtual.getApostas();
 
-		System.out.println(" *** Resultado da rodada ***");
+		System.out.println();
+		System.out.println("****** Resultado da rodada " + numeroDaRodada + " ******");
+
+		System.out.println("Jogadores participantes: ");
+		for (Jogador jogador : jogadores) {
+			System.out.println("Jogador: " + jogador.getNome() + ", palitos restastes: " + jogador.getPalitos());
+		}
+
 		System.out.println("Jogadas:");
 		for (Jogada jogada : jogadas) {
 			System.out
@@ -200,5 +206,7 @@ public class ConsoleInterface extends UserInterface {
 		} else {
 			System.out.println("Ninguém acertou!");
 		}
+
+		System.out.println("***********************************");
 	}
 }

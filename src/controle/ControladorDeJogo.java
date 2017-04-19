@@ -126,6 +126,6 @@ public class ControladorDeJogo {
 	}
 
 	public void chamaTelaResultadoDaRodada(Jogador vencedor, Rodada rodadaAtual) {
-		userInterface.exibeTelaResultadoDaRodada(vencedor, rodadaAtual);
+		userInterface.exibeTelaResultadoDaRodada(vencedor, rodadaAtual, jogadores, historicoDeRodadas.getRodadas().size());
 	}
 }
