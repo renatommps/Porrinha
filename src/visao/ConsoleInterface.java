@@ -1,14 +1,18 @@
 package visao;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 
 import controle.ControladorDeJogo;
 import logica.Aposta;
+import logica.EstrategiaAleatoria;
 import logica.HistoricoDeRodadas;
 import logica.Jogada;
 import logica.Jogador;
+import logica.JogadorHumano;
 import logica.JogadorIA;
 import logica.Rodada;
 
@@ -171,8 +175,36 @@ public class ConsoleInterface extends UserInterface {
 
 	@Override
 	public void exibeTelaDeSaidaDoJogo() {
+		imprimeRankingDeVencedores();
 		System.out.println("Adeus humanos, foi um prezer o entreter :)");
 		System.out.println("Volte sempre ao maravilhoso jogo de Porrinha!");
+	}
+
+	private void imprimeRankingDeVencedores() {
+		List<Rodada> rodadas = controlador.getHistoricoDeRodadas().getRodadas();
+		List<Jogador> vencedoresHumanos = new ArrayList<Jogador>();
+		List<Jogador> vencedoresIAaleatorio = new ArrayList<Jogador>();
+		List<Jogador> vencedoresIAminmax = new ArrayList<Jogador>();
+
+		// adiciona todos os vencedores na lista
+		for (Rodada rodada : rodadas) {
+			Jogador vencedor = rodada.getVencedor();
+			if (vencedor != null) {
+				if (vencedor instanceof JogadorHumano) {
+					vencedoresHumanos.add(vencedor);
+				} else if (JogadorIA.class.cast(vencedor).getEstrategia() instanceof EstrategiaAleatoria) {
+					vencedoresIAaleatorio.add(vencedor);
+				} else {
+					vencedoresIAminmax.add(vencedor);
+				}
+			}
+		}
+
+		System.out.println();
+		System.out.println("***** Ranking de vitórias *****");
+		System.out.println("Jogadores IA aleatoria: " + vencedoresIAaleatorio.size());
+		System.out.println("Jogadores IA mimmax: " + vencedoresIAminmax.size());
+		System.out.println();
 	}
 
 	@Override

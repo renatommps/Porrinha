@@ -6,6 +6,7 @@ import java.util.List;
 import logica.StateExit;
 import logica.HistoricoDeRodadas;
 import logica.Jogador;
+import logica.Partida;
 import logica.Rodada;
 import logica.StateContext;
 import visao.ConsoleInterface;
@@ -17,6 +18,7 @@ public class ControladorDeJogo {
 	Interface userInterface;
 
 	// lógica
+	private List<Partida> historicoDePartidas;
 	private HistoricoDeRodadas historicoDeRodadas;
 	private List<Jogador> jogadores;
 	private int numeroDeJogadoresIA;
@@ -27,6 +29,8 @@ public class ControladorDeJogo {
 	final StateContext gameState;
 
 	public ControladorDeJogo() {
+		historicoDePartidas = new ArrayList<Partida>();
+
 		historicoDeRodadas = new HistoricoDeRodadas();
 
 		jogadores = new ArrayList<Jogador>();
@@ -41,6 +45,14 @@ public class ControladorDeJogo {
 			gameState.process();
 		}
 		gameState.process(); // processa o StateExit
+	}
+
+	public List<Partida> getHistoricoDePartidas() {
+		return historicoDePartidas;
+	}
+
+	public void addHistoricoDePartidas(Partida partida) {
+		historicoDePartidas.add(partida);
 	}
 
 	public int getNumeroDeJogadoresIA() {
@@ -126,6 +138,7 @@ public class ControladorDeJogo {
 	}
 
 	public void chamaTelaResultadoDaRodada(Jogador vencedor, Rodada rodadaAtual) {
-		userInterface.exibeTelaResultadoDaRodada(vencedor, rodadaAtual, jogadores, historicoDeRodadas.getRodadas().size());
+		userInterface.exibeTelaResultadoDaRodada(vencedor, rodadaAtual, jogadores,
+				historicoDeRodadas.getRodadas().size());
 	}
 }
