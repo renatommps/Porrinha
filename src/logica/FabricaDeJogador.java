@@ -14,8 +14,10 @@ public class FabricaDeJogador {
 			return new JogadorIA(nome, new EstrategiaAleatoria());
 		}
 		if (tipo.equalsIgnoreCase("MINMAX")) {
-			return new JogadorIA(nome, new EstrategiaMinMax(
-					new EuristicaCombinada(new EuristicaPossibilidade(), new EuristicaAleatoria(), 6, 4)));
+			return new JogadorIA(nome,
+					new EstrategiaMinMax(new EuristicaCombinada(
+							new EuristicaCombinada(new EuristicaPossibilidade(), new EuristicaApostaDosOutros(), 7, 10),
+							new EuristicaAleatoria(), 7, 4)));
 		}
 
 		return null;

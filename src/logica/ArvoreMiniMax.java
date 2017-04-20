@@ -22,8 +22,6 @@ public class ArvoreMiniMax {
 
 	public EstadoArvore getJogada() {
 		raiz.criaFilhos();
-		//Calcular tamanho árvore. Já já tiro
-		System.out.println(raiz.getTamanho());
 		return raiz.best.estado;
 	}
 

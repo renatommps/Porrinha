@@ -13,9 +13,6 @@ public class EuristicaAleatoria extends Euristica {
 		int jogadorAtual = estado.getJogadorAtual();
 		int diff = maxJogadores - jogadorAtual;
 		double peso = (double) diff/ maxJogadores;
-		if(peso < 0.05) {
-			peso += 0.05;
-		}
 		return Math.random() * peso;
 	}
 }
