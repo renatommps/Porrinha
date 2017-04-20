@@ -13,16 +13,16 @@ import visao.Interface;
 
 public class ControladorDeJogo {
 
-	// visão
+	// vis��o
 	Interface userInterface;
 
-	// lógica
+	// l��gica
 	private HistoricoDeRodadas historicoDeRodadas;
 	private List<Jogador> jogadores;
 	private int numeroDeJogadoresIA;
 	private int numeroDeJogadoresHumanos;
 
-	// lógica, controle de estados do jogo (inicio, insanciação de jogadores,
+	// l��gica, controle de estados do jogo (inicio, insancia����o de jogadores,
 	// partida, etc..)
 	final StateContext gameState;
 
@@ -97,10 +97,14 @@ public class ControladorDeJogo {
 
 	public int chamaMenuDefinicaoJogadaJogadorHumano(Jogador jogador, List<Jogador> jogadores,
 			HistoricoDeRodadas historicoDeRodadas) {
-		int palistosJogados = userInterface.exibeMenuDeDefinicaoDeJogadaJogadorHumano(jogador, jogadores,
-				historicoDeRodadas);
+		int palitosNaMao = jogador.getPalitos();
+		int palitosJogados = 0;
+		while ((palitosJogados = userInterface.exibeMenuDeDefinicaoDeJogadaJogadorHumano(jogador, jogadores,
+				historicoDeRodadas)) > palitosNaMao) {
 
-		return palistosJogados;
+		}
+
+		return palitosJogados;
 	}
 
 	public int chamaMenuDefinicaoApostaJogadorHumano(HistoricoDeRodadas historicoDeRodadas, List<Jogador> jogadores,
@@ -126,6 +130,7 @@ public class ControladorDeJogo {
 	}
 
 	public void chamaTelaResultadoDaRodada(Jogador vencedor, Rodada rodadaAtual) {
-		userInterface.exibeTelaResultadoDaRodada(vencedor, rodadaAtual, jogadores, historicoDeRodadas.getRodadas().size());
+		userInterface.exibeTelaResultadoDaRodada(vencedor, rodadaAtual, jogadores,
+				historicoDeRodadas.getRodadas().size());
 	}
 }
