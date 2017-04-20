@@ -1,6 +1,7 @@
 package logica;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class EuristicaPossibilidade extends Euristica {
 
@@ -9,7 +10,6 @@ public class EuristicaPossibilidade extends Euristica {
 		ArrayList<ArrayList<Integer>> maoAposta = estado.getMaoAposta();
 
 		int jogadosPeloAtual = estado.jogadosPeloAtual();
-
 		ArrayList<Integer> possiveisValores = new ArrayList<Integer>();
 		possiveisValores.add(jogadosPeloAtual);
 		for(int i = 0; i < maoAposta.size(); ++i) {
@@ -24,15 +24,25 @@ public class EuristicaPossibilidade extends Euristica {
 			}
 		}
 		
+		HashMap<Integer, Integer> umaPinha = new HashMap<Integer, Integer>();
+		for(Integer elemento : possiveisValores) {
+			Integer count = umaPinha.get(elemento);
+			umaPinha.put(elemento, count != null ? count + 1 : 1);
+		}
+		
 		int apostaDoJogador = maoAposta.get(estado.getJogadorAtual()).get(1);
 		
-		int contagem = 0;
-		for(Integer possibilidade : possiveisValores) {
-			if(possibilidade == apostaDoJogador) {
-				++contagem;
+		int contagem = umaPinha.containsKey(apostaDoJogador) ? umaPinha.get(apostaDoJogador) : 0;
+		
+		int max = 0;
+		
+		for(Integer key : umaPinha.keySet()) {
+			if(umaPinha.get(key) > max) {
+				max = umaPinha.get(key);
 			}
 		}
-		double nota = (double) contagem / possiveisValores.size();
+		
+		double nota = (double) contagem / max;
 		
 		return nota;
 	}
