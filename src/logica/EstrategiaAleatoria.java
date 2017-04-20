@@ -195,7 +195,8 @@ public class EstrategiaAleatoria implements Estrategia {
 			 * 8, então ele deve ter jogado 2.
 			 */
 			if (apostaOponenteAtual > totalPalitosOponentesRestantes + palitosDoJogador) {
-				int estimativaPalitosDoOponente = apostaOponenteAtual - (totalPalitosOponentesRestantes + palitosDoJogador);
+				int estimativaPalitosDoOponente = apostaOponenteAtual
+						- (totalPalitosOponentesRestantes + palitosDoJogador);
 				apostaTotal += estimativaPalitosDoOponente;
 				continue; // vai para o próximo oponente
 			}

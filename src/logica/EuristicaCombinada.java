@@ -4,6 +4,7 @@ public class EuristicaCombinada extends Euristica {
 	
 
 	public EuristicaCombinada(Euristica lhs, Euristica rhs, int pesoEsquerda, int pesoDireta) {
+		assert(pesoEsquerda > 0 && pesoDireita > 0);
 		this.esquerda = lhs;
 		this.pesoEsquerda = pesoEsquerda;
 		this.pesoDireita = pesoDireta;

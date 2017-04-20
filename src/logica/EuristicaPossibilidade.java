@@ -6,7 +6,6 @@ public class EuristicaPossibilidade extends Euristica {
 
 	@Override
 	public double accept(EstadoPorrinha estado) {
-		ArrayList<Double> notas = new ArrayList<Double>();
 		ArrayList<ArrayList<Integer>> maoAposta = estado.getMaoAposta();
 
 		int jogadosPeloAtual = estado.jogadosPeloAtual();

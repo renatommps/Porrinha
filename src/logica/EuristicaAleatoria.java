@@ -1,7 +1,5 @@
 package logica;
 
-import java.util.ArrayList;
-
 public class EuristicaAleatoria extends Euristica {
 
 	public EuristicaAleatoria() {
@@ -12,7 +10,4 @@ public class EuristicaAleatoria extends Euristica {
 	public double accept(EstadoPorrinha estado) {
 		return Math.random();
 	}
-
-	
-
 }
