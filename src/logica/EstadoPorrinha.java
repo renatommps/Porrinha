@@ -22,7 +22,24 @@ public class EstadoPorrinha implements EstadoArvore {
 		for (ArrayList<Integer> jogador : maoAposta) {
 			sum += jogador.get(0);
 		}
-		for (int i = 0; i <= sum; ++i) {
+		for (int i = jogados; i <= sum; ++i) {
+			if (unique(jogadorAtual, i)) {
+				ArrayList<ArrayList<Integer>> novo = new ArrayList<ArrayList<Integer>>();
+				for(ArrayList<Integer> toClone: maoAposta) {
+					ArrayList<Integer> juninho = new ArrayList<Integer>();
+					juninho.add(toClone.get(0));
+					juninho.add(toClone.get(1));
+					novo.add(juninho);
+				}
+				ArrayList<Integer> apostaJogadorAtual = novo.get(jogadorAtual);
+				apostaJogadorAtual.set(1, i);
+				novo.set(jogadorAtual, apostaJogadorAtual);
+				EstadoPorrinha toAdd = new EstadoPorrinha(novo, jogados, proxJogador, maxJogadores);
+				toAdd.jogadorArvore = this.jogadorArvore;
+				ret.add(toAdd);
+			}
+		}
+		for (int i = 0; i < jogados; ++i) {
 			if (unique(jogadorAtual, i)) {
 				ArrayList<ArrayList<Integer>> novo = new ArrayList<ArrayList<Integer>>();
 				for(ArrayList<Integer> toClone: maoAposta) {

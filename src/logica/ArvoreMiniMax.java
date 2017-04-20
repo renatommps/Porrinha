@@ -17,60 +17,33 @@ public class ArvoreMiniMax {
 		this.profundidadeMax = profundidade;
 		this.euristica = euristica;
 		this.numJogadores = numJogadores;
-		this.raiz = new Nodo(inicial, 0);
+		this.raiz = new Nodo(inicial, 0, -10, 10);
 	}
 
 	public EstadoArvore getJogada() {
 		raiz.criaFilhos();
+		//Calcular tamanho árvore. Já já tiro
+		System.out.println(raiz.getTamanho());
 		return raiz.best.estado;
 	}
 
 	private class Nodo {
-		private Nodo(EstadoArvore estado, int profundidade) {
+		private Nodo(EstadoArvore estado, int profundidade, double alfa, double beta) {
 			this.estado = estado;
 			this.profundidade = profundidade;
 			this.estadoFinal = estado.isFinal();
 			this.folha = (profundidade == profundidadeMax) || estadoFinal;
 			this.filhos = new ArrayList<Nodo>();
+			this.alfa = alfa;
+			this.beta = beta;
 		}
-
-		private class NodoCompare implements Comparator<Nodo> {
-
-			private NodoCompare(int index) {
-				this.index = index;
+		
+		private int getTamanho() {
+			int count = 1;
+			for(Nodo nodo : filhos) {
+				count += nodo.getTamanho();
 			}
-
-			@Override
-			public int compare(Nodo lhs, Nodo rhs) {
-				double valLeft = lhs.vetorGanhos;
-				double valRight = rhs.vetorGanhos;
-				if(index == jogadorAtual) {
-					if(valLeft < valRight) {
-						return -1;
-					}
-					else if(valLeft == valRight) {
-						return 0;
-					}
-					else {
-						return 1;
-					}
-				}
-				else {
-					if(valLeft < valRight) {
-						return 1;
-					}
-					else if(valLeft == valRight) {
-						return 0;
-					}
-					else {
-						return -1;
-					}
-				}
-				
-			}
-
-			private int index;
-
+			return count;
 		}
 
 		private boolean criaFilhos() {
@@ -78,19 +51,31 @@ public class ArvoreMiniMax {
 				this.vetorGanhos = euristica.eval(estado);
 				return false;
 			}
-			for (EstadoArvore novoEstado : estado.transicoes()) {
-				Nodo filho = new Nodo(novoEstado, profundidade + 1);
-				filho.criaFilhos();
-				/////////////
-				EstadoPorrinha teste = (EstadoPorrinha) filho.estado;
-				//System.out.println(teste.getMaoAposta());
-				/////////////
-				filhos.add(filho);
-			}
+			Nodo max = null;
 			int index = (jogadorAtual + profundidade) % numJogadores;
-			NodoCompare compare = new NodoCompare(index);
-			Nodo max = Collections.max(filhos, compare);
-			vetorGanhos = max.vetorGanhos;
+			this.vetorGanhos = index == jogadorAtual ? -10 : 10;
+			for (EstadoArvore novoEstado : estado.transicoes()) {
+				Nodo filho = new Nodo(novoEstado, profundidade + 1, alfa, beta);
+				filho.criaFilhos();
+				if(index == jogadorAtual) {
+					if(filho.vetorGanhos > this.vetorGanhos) {
+						max = filho;
+						this.vetorGanhos = filho.vetorGanhos;
+						alfa = Math.max(alfa, this.vetorGanhos);
+					}
+				}
+				else {
+					if(filho.vetorGanhos < this.vetorGanhos) {
+						max = filho;
+						this.vetorGanhos = filho.vetorGanhos;
+						beta = Math.min(beta, this.vetorGanhos);
+					}
+				}
+				filhos.add(filho);
+				if(beta <= alfa) {
+					break;
+				}
+			}
 			best = max;
 			return true;
 		}
@@ -108,6 +93,10 @@ public class ArvoreMiniMax {
 		private int profundidade;
 
 		private boolean estadoFinal;
+		
+		private double alfa;
+		
+		private double beta;
 
 	}
 
@@ -120,4 +109,5 @@ public class ArvoreMiniMax {
 	private int numJogadores;
 
 	private Euristica euristica;
+	
 }
