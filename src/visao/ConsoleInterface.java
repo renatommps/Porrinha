@@ -28,13 +28,13 @@ public class ConsoleInterface extends UserInterface {
 		System.out.println("****************************************************");
 
 		System.out.println("Quantos jogadores de IA o jogo irá ter ? (mínimo 2, máximo 5)");
-		int numeroDeJogadoresIA = scanner.nextInt(); // checagem de erros seria
-														// bom né :)
+		int numeroDeJogadoresIA = scanner.nextInt();
+
 		controlador.setNumeroDeJogadoresIA(numeroDeJogadoresIA);
 
 		System.out.println("Quantos jogadores humanos o jogo irá ter ? (mínimo 0, máximo 5)");
-		int numeroDeJogadoresHumanos = scanner.nextInt(); // checagem de erros
-															// seria bom né :)
+		int numeroDeJogadoresHumanos = scanner.nextInt();
+
 		scanner.nextLine(); // lê o enter para não atrapalhar a próxima leitura
 		controlador.setNumeroDeJogadoresHumanos(numeroDeJogadoresHumanos);
 	}

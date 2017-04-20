@@ -5,30 +5,21 @@ import java.util.List;
 
 public class EstrategiaMinMax implements Estrategia {
 
-	// aqui eu tenho a minha arvore
-	// aqui eu tenho a minha euristica para a arvore
-	// aqui eu tenho quaisquer outras coisas que precisar
-	
 	public EstrategiaMinMax(Euristica euristica) {
 		super();
 		this.euristica = euristica;
-		// aqui eu instancio a minha euristica
-		// aqui eu instancio a minha arvore minmax passando a euristica criada e mais o que precisar
-		// aqui eu fa��o quaisquer outras coisas que precisar
 	}
-
-	// aqui eu implemento quaisquer outros m��todos privados que precisar
 	
 	@Override
 	public int definirJogada(HistoricoDeRodadas historicoDeRodadas, int palitosDoJogador, List<Jogador> jogadores) {
 		/*
-		 * OBS: O hist��rico n��o est�� sendo usado, deixei ai caso alguma
-		 * euristica v�� usar...
+		 * OBS: O historico nao esta sendo usado, deixei ai caso alguma
+		 * euristica vai usar...
 		 */
 
 		int jogadaMinima = 0;
 
-		// primeira rodada, regra especial que n��o pode jogar zero
+		// primeira rodada, regra especial que nao pode jogar zero
 		if (historicoDeRodadas.estaVazio()) {
 			jogadaMinima = 1;
 		}
@@ -64,7 +55,7 @@ public class EstrategiaMinMax implements Estrategia {
 			return juninhos.get(atual.getApostas().size()).get(1);
 		} catch (NumeroDeJogadoresException e) {
 			e.printStackTrace();
-			System.out.println("Se chegar aqui você fez coisa errada ulmanu indiota");
+			System.out.println("Se chegar aqui você fez coisa errada, ou os projetos de cientistas fizeram cagada.");
 			return -1;
 		}
 		
