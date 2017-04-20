@@ -47,6 +47,10 @@ public class StateEncerraRodada implements State {
 				context.setState(new StateDefineJogadasDaRodada());
 			}
 		} else { // se ninguém tiver vencido, vai para a próxima rodada
+
+			// coloca o primeiro como último para apostar
+			redefineOrdemDeJogadas(controladorDeJogo);
+
 			context.setState(new StateDefineJogadasDaRodada());
 		}
 	}
@@ -55,6 +59,13 @@ public class StateEncerraRodada implements State {
 		List<Jogador> jogadores = controladorDeJogo.getJogadores();
 		jogadores.remove(vencedor);
 		jogadores.add(0, vencedor);
+	}
+
+	private void redefineOrdemDeJogadas(ControladorDeJogo controladorDeJogo) {
+		List<Jogador> jogadores = controladorDeJogo.getJogadores();
+		Jogador primeiro = jogadores.get(0);
+		jogadores.remove(0);
+		jogadores.add(primeiro);
 	}
 
 	private int getPalitosJogadosNaRodada(Rodada rodadaAtual) {

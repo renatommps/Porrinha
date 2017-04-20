@@ -1,15 +1,20 @@
 package visao;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 
 import controle.ControladorDeJogo;
 import logica.Aposta;
+import logica.EstrategiaAleatoria;
 import logica.HistoricoDeRodadas;
 import logica.Jogada;
 import logica.Jogador;
+import logica.JogadorHumano;
 import logica.JogadorIA;
+import logica.Partida;
 import logica.Rodada;
 
 public class ConsoleInterface extends UserInterface {
@@ -28,13 +33,13 @@ public class ConsoleInterface extends UserInterface {
 		System.out.println("****************************************************");
 
 		System.out.println("Quantos jogadores de IA o jogo irá ter ? (mínimo 2, máximo 5)");
-		int numeroDeJogadoresIA = scanner.nextInt(); // checagem de erros seria
-														// bom né :)
+		int numeroDeJogadoresIA = scanner.nextInt();
+
 		controlador.setNumeroDeJogadoresIA(numeroDeJogadoresIA);
 
 		System.out.println("Quantos jogadores humanos o jogo irá ter ? (mínimo 0, máximo 5)");
-		int numeroDeJogadoresHumanos = scanner.nextInt(); // checagem de erros
-															// seria bom né :)
+		int numeroDeJogadoresHumanos = scanner.nextInt();
+
 		scanner.nextLine(); // lê o enter para não atrapalhar a próxima leitura
 		controlador.setNumeroDeJogadoresHumanos(numeroDeJogadoresHumanos);
 	}
@@ -171,8 +176,35 @@ public class ConsoleInterface extends UserInterface {
 
 	@Override
 	public void exibeTelaDeSaidaDoJogo() {
+		imprimeRankingDeVencedores();
 		System.out.println("Adeus humanos, foi um prezer o entreter :)");
 		System.out.println("Volte sempre ao maravilhoso jogo de Porrinha!");
+	}
+
+	private void imprimeRankingDeVencedores() {
+
+		List<Partida> historicoDePartidas = controlador.getHistoricoDePartidas();
+		int vitoriasHumanas = 0;
+		int vitoriasIAaleatoria = 0;
+		int vitoriasIAminmax = 0;
+
+		for (Partida partida : historicoDePartidas) {
+			Jogador vencedor = partida.getVencedor();
+			if (vencedor instanceof JogadorHumano) {
+				vitoriasHumanas++;
+			} else if (JogadorIA.class.cast(vencedor).getEstrategia() instanceof EstrategiaAleatoria) {
+				vitoriasIAaleatoria++;
+			} else {
+				vitoriasIAminmax++;
+			}
+		}
+
+		System.out.println();
+		System.out.println("***** Ranking de vitórias *****");
+		System.out.println("Jogadores humanos: " + vitoriasHumanas);
+		System.out.println("Jogadores IA aleatoria: " + vitoriasIAaleatoria);
+		System.out.println("Jogadores IA mimmax: " + vitoriasIAminmax);
+		System.out.println();
 	}
 
 	@Override

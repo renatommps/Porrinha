@@ -13,18 +13,50 @@ public class StateFimDeJogo implements State {
 
 	@Override
 	public void process(StateContext context, ControladorDeJogo controladorDeJogo) {
-		boolean exit = false;
 
+//		boolean exit = false;
+//
+//		HistoricoDeRodadas historicoDeRodadas = controladorDeJogo.getHistoricoDeRodadas();
+//		List<Jogador> jogadores = controladorDeJogo.getJogadores();
+//
+//		// mostra resultado do jogo
+//		controladorDeJogo.chamaTelaDeResultadoDoJogo(historicoDeRodadas, jogadores);
+//
+//		// define se deve começar outra partida, ou abandonar a aplicação
+//		exit = controladorDeJogo.chamaMenuDefinicaoDeReinicioDeJogo();
+//
+//		// salva a partida atual, com seu vencedor e a estrategia do mesmo
+//		Jogador vencedor = historicoDeRodadas.getUltimaRodada().getVencedor();
+//		Estrategia estrategiaDoVencedor = null;
+//		if (vencedor instanceof JogadorIA){
+//			estrategiaDoVencedor = JogadorIA.class.cast(vencedor).getEstrategia();
+//		}
+//		Partida partidaAtual = new Partida(vencedor, estrategiaDoVencedor);
+//		controladorDeJogo.addHistoricoDePartidas(partidaAtual);
+//		
+//		if (exit) {
+//			context.setState(new StateExit());
+//		} else { // reseta as rodadas e lista de jogadores
+//
+//			controladorDeJogo.setHistoricoDeRodadas(new HistoricoDeRodadas());
+//			controladorDeJogo.setJogadores(new ArrayList<Jogador>());
+//
+//			// volta para a tela inicial
+//			context.setState(new StateStart());
+//		}
+		
 		HistoricoDeRodadas historicoDeRodadas = controladorDeJogo.getHistoricoDeRodadas();
-		List<Jogador> jogadores = controladorDeJogo.getJogadores();
 
-		// mostra resultado do jogo
-		controladorDeJogo.chamaTelaDeResultadoDoJogo(historicoDeRodadas, jogadores);
+		// salva a partida atual, com seu vencedor e a estrategia do mesmo
+		Jogador vencedor = historicoDeRodadas.getUltimaRodada().getVencedor();
+		Estrategia estrategiaDoVencedor = null;
+		if (vencedor instanceof JogadorIA){
+			estrategiaDoVencedor = JogadorIA.class.cast(vencedor).getEstrategia();
+		}
+		Partida partidaAtual = new Partida(vencedor, estrategiaDoVencedor);
+		controladorDeJogo.addHistoricoDePartidas(partidaAtual);
 
-		// define se deve começar outra partida, ou abandonar a aplicação
-		exit = controladorDeJogo.chamaMenuDefinicaoDeReinicioDeJogo();
-
-		if (exit) {
+		if (controladorDeJogo.getHistoricoDePartidas().size() > 100) {
 			context.setState(new StateExit());
 		} else {
 			// reseta as rodadas e lista de jogadores
@@ -32,8 +64,7 @@ public class StateFimDeJogo implements State {
 			controladorDeJogo.setJogadores(new ArrayList<Jogador>());
 
 			// volta para a tela inicial
-			context.setState(new StateStart());
+			context.setState(new StatePlayersInstantiation());
 		}
 	}
-
 }
