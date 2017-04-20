@@ -26,4 +26,6 @@ public interface Interface {
 
 	public void exibeTelaResultadoDaRodada(Jogador vencedor, Rodada rodadaAtual, List<Jogador> jogadores, int numeroDaRodada);
 
+	public void mensagemErroPalitosJogadosMaiorQueNaMao(int palitosJogados, int palitosNaMao);
+
 }

@@ -31,16 +31,19 @@ public class ConsoleInterface extends UserInterface {
 		System.out.println("****************************************************");
 		System.out.println("**** Bem vindo ao maravilhoso jogo de Porrinha! ****");
 		System.out.println("****************************************************");
+		int numeroDeJogadoresIA = 0;
+		int numeroDeJogadoresHumanos = 0;
+		while((numeroDeJogadoresIA + numeroDeJogadoresHumanos) < 2 || (numeroDeJogadoresIA + numeroDeJogadoresHumanos) > 5) {
+			System.out.println("Máximo de jogadores permitidos: 5. Mínimo: 2.");
+		
+			System.out.println("Quantos jogadores de IA o jogo irá ter?");
+			numeroDeJogadoresIA = scanner.nextInt();
 
-		System.out.println("Quantos jogadores de IA o jogo irá ter ? (mínimo 2, máximo 5)");
-		int numeroDeJogadoresIA = scanner.nextInt();
-
-		controlador.setNumeroDeJogadoresIA(numeroDeJogadoresIA);
-
-		System.out.println("Quantos jogadores humanos o jogo irá ter ? (mínimo 0, máximo 5)");
-		int numeroDeJogadoresHumanos = scanner.nextInt();
-
+			System.out.println("Quantos jogadores humanos o jogo irá ter?");
+			numeroDeJogadoresHumanos = scanner.nextInt();
+		}
 		scanner.nextLine(); // lê o enter para não atrapalhar a próxima leitura
+		controlador.setNumeroDeJogadoresIA(numeroDeJogadoresIA);
 		controlador.setNumeroDeJogadoresHumanos(numeroDeJogadoresHumanos);
 	}
 
@@ -240,5 +243,10 @@ public class ConsoleInterface extends UserInterface {
 		}
 
 		System.out.println("***********************************");
+	}
+
+	@Override
+	public void mensagemErroPalitosJogadosMaiorQueNaMao(int palitosJogados, int palitosNaMao) {
+		System.out.println("Não foi possível jogar " + palitosJogados + " palitos: somente " + palitosNaMao + " palitos na mão.");
 	}
 }

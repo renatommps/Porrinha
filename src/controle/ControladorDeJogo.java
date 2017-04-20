@@ -112,8 +112,8 @@ public class ControladorDeJogo {
 		int palitosNaMao = jogador.getPalitos();
 		int palitosJogados = 0;
 		while ((palitosJogados = userInterface.exibeMenuDeDefinicaoDeJogadaJogadorHumano(jogador, jogadores,
-				historicoDeRodadas)) > palitosNaMao) {
-
+				historicoDeRodadas)) > palitosNaMao || palitosJogados < 0) {
+			userInterface.mensagemErroPalitosJogadosMaiorQueNaMao(palitosJogados, palitosNaMao);
 		}
 
 		return palitosJogados;
