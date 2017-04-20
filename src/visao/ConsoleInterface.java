@@ -14,6 +14,7 @@ import logica.Jogada;
 import logica.Jogador;
 import logica.JogadorHumano;
 import logica.JogadorIA;
+import logica.Partida;
 import logica.Rodada;
 
 public class ConsoleInterface extends UserInterface {
@@ -181,29 +182,28 @@ public class ConsoleInterface extends UserInterface {
 	}
 
 	private void imprimeRankingDeVencedores() {
-		List<Rodada> rodadas = controlador.getHistoricoDeRodadas().getRodadas();
-		List<Jogador> vencedoresHumanos = new ArrayList<Jogador>();
-		List<Jogador> vencedoresIAaleatorio = new ArrayList<Jogador>();
-		List<Jogador> vencedoresIAminmax = new ArrayList<Jogador>();
 
-		// adiciona todos os vencedores na lista
-		for (Rodada rodada : rodadas) {
-			Jogador vencedor = rodada.getVencedor();
-			if (vencedor != null) {
-				if (vencedor instanceof JogadorHumano) {
-					vencedoresHumanos.add(vencedor);
-				} else if (JogadorIA.class.cast(vencedor).getEstrategia() instanceof EstrategiaAleatoria) {
-					vencedoresIAaleatorio.add(vencedor);
-				} else {
-					vencedoresIAminmax.add(vencedor);
-				}
+		List<Partida> historicoDePartidas = controlador.getHistoricoDePartidas();
+		int vitoriasHumanas = 0;
+		int vitoriasIAaleatoria = 0;
+		int vitoriasIAminmax = 0;
+
+		for (Partida partida : historicoDePartidas) {
+			Jogador vencedor = partida.getVencedor();
+			if (vencedor instanceof JogadorHumano) {
+				vitoriasHumanas++;
+			} else if (JogadorIA.class.cast(vencedor).getEstrategia() instanceof EstrategiaAleatoria) {
+				vitoriasIAaleatoria++;
+			} else {
+				vitoriasIAminmax++;
 			}
 		}
 
 		System.out.println();
 		System.out.println("***** Ranking de vitórias *****");
-		System.out.println("Jogadores IA aleatoria: " + vencedoresIAaleatorio.size());
-		System.out.println("Jogadores IA mimmax: " + vencedoresIAminmax.size());
+		System.out.println("Jogadores humanos: " + vitoriasHumanas);
+		System.out.println("Jogadores IA aleatoria: " + vitoriasIAaleatoria);
+		System.out.println("Jogadores IA mimmax: " + vitoriasIAminmax);
 		System.out.println();
 	}
 
